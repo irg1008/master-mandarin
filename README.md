@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Mandarin Master 🀄
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mandarin Master is a beautiful, interactive web application designed to help users master HSK1 Chinese vocabulary and sentence structure through gamified learning.
 
-Currently, two official plugins are available:
+## 🎯 Goal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The primary aim of this project is to provide an engaging, aesthetically pleasing platform for learning Mandarin Chinese, specifically targeting the **HSK1 (Hanyu Shuiping Kaoshi Level 1)** proficiency level. It focuses on:
+-   **Vocabulary Acquisition:** Learning and retaining essential characters.
+-   **Sentence Construction:** Understanding grammar and word order (SVO/SAVO structures).
+-   **Pronunciation:** Listening to native audio for every word.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 1. 📚 Vocabulary Collection
+-   Explore a comprehensive list of HSK1 words.
+-   **Interactive Cards:** Beautiful, 3D-flippable cards showing Hanzi, Pinyin, and English translations.
+-   **Audio Pronunciation:** Click any unlocked card to hear its native pronunciation.
+-   **Smart Grouping:** Words are categorized by grammar type (Noun, Verb, Adjective, Particle) with distinct color coding.
 
-## Expanding the ESLint configuration
+### 2. ⚔️ Sentence Duel
+-   **Gamified Syntax Practice:** A drag-and-drop game where you build correct sentences from scrambled characters.
+-   **Duel Mode:** Test your skills against the "Master" by translating English sentences into Chinese.
+-   **Streaks & XP:** Earn experience points and build win streaks to level up your profile.
+-   **Instant Feedback:** Get immediate visual and audio feedback on your answers.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. 🎨 Responsive & Themed UI
+-   **Imperial Theme:** A custom "Imperial Red & Gold" theme inspired by traditional Chinese aesthetics.
+-   **Dark/Light Mode:** Seamlessly switch between light and dark themes.
+-   **Mobile-First Design:** Fully responsive layout that works perfectly on desktop and mobile devices.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+-   **Framework:** [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/)
+-   **Build Tool:** [Vite](https://vitejs.dev/)
+-   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+-   **UI Components:** [shadcn/ui](https://ui.shadcn.com/) (Radix UI + Tailwind)
+-   **Icons:** [Lucide React](https://lucide.dev/)
+-   **Audio:** Native HTML5 Audio with custom engine
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Getting Started
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2.  **Run the development server:**
+    ```bash
+    pnpm dev
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3.  **Build for production:**
+    ```bash
+    pnpm build
+    ```
+
+## 📂 Project Structure
+
+-   `src/components`: Reusable UI components (VocabularyCard, HeaderBar, etc.)
+-   `src/data`: HSK1 vocabulary list and game data
+-   `src/engine`: Game logic for duels and audio handling
+-   `src/assets`: Static assets like audio files and images
+
+---
+*Built with ❤️ for Mandarin learners.*
