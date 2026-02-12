@@ -4,6 +4,8 @@ import type { VocabEntry } from "@/data/hsk1-vocabulary";
 import { HSK1_VOCABULARY } from "@/data/hsk1-vocabulary";
 import { generateQuest, checkAnswer, getXPForStreak, type QuestCard } from "@/engine/duel";
 import { VocabularyCard } from "./VocabularyCard";
+import correctSoundParams from "@/assets/sounds/correct.mp3";
+import { playAudio } from "@/engine/audio";
 
 interface SentenceDuelProps {
   onXPEarned: (xp: number) => void;
@@ -21,6 +23,12 @@ export function SentenceDuel({ onXPEarned, onDuelComplete, streak, onAudioError 
   const [earnedXP, setEarnedXP] = useState(0);
   const [showXPAnimation, setShowXPAnimation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+
+  const playSuccessSound = useCallback(() => {
+    const audio = new Audio(correctSoundParams);
+    audio.volume = 0.5;
+    audio.play().catch((err) => console.error("Failed to play success sound:", err));
+  }, []);
 
   const startNewQuest = useCallback(() => {
     const newQuest = generateQuest(HSK1_VOCABULARY, difficulty);
@@ -42,6 +50,9 @@ export function SentenceDuel({ onXPEarned, onDuelComplete, streak, onAudioError 
     // Don't add if already placed (unique safeguard for this UI)
     if (placedCards.includes(card)) return;
 
+    // Play pronunciation
+    playAudio(card.hanzi, onAudioError);
+
     const newPlaced = [...placedCards, card];
     setPlacedCards(newPlaced);
   };
@@ -58,6 +69,7 @@ export function SentenceDuel({ onXPEarned, onDuelComplete, streak, onAudioError 
       setShowAnswer(true);
 
       if (isCorrect) {
+        playSuccessSound(); // Play success sound
         const xp = getXPForStreak(quest.xpReward, streak);
         setEarnedXP(xp);
         setShowXPAnimation(true);
@@ -233,4 +245,3 @@ export function SentenceDuel({ onXPEarned, onDuelComplete, streak, onAudioError 
     </div>
   );
 }
-```
