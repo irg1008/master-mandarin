@@ -9,25 +9,28 @@ export function playAudio(
     const url = `${AUDIO_BASE_URL}cmn-${encodeURIComponent(hanzi)}.mp3`;
     const audio = new Audio(url);
 
+    const timeoutId = setTimeout(() => {
+      const msg = `Audio loading timed out for "${hanzi}". Please check your connection.`;
+      onError?.(msg);
+      reject(new Error(msg));
+    }, 8000);
+
+    const cleanup = () => clearTimeout(timeoutId);
+
     audio.addEventListener("canplaythrough", () => {
+      cleanup();
       audio.play().then(resolve).catch((err) => {
         const msg = `Could not play audio for "${hanzi}". Please check your speakers.`;
         onError?.(msg);
         reject(err);
       });
-    });
+    }, { once: true });
 
     audio.addEventListener("error", () => {
+      cleanup();
       const msg = `Audio file not found for "${hanzi}". The pronunciation may not be available yet.`;
       onError?.(msg);
       reject(new Error(msg));
-    });
-
-    // Timeout after 5 seconds
-    setTimeout(() => {
-      const msg = `Audio loading timed out for "${hanzi}". Please check your connection.`;
-      onError?.(msg);
-      reject(new Error(msg));
-    }, 5000);
+    }, { once: true });
   });
 }
