@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { MandarinMaster } from "./MandarinMaster";
+import { App } from "./router";
 import "./globals.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MandarinMaster />
+    <App />
   </StrictMode>
 );
